@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="form/form.css">
+</head>
+<body>
+<button class="js-open-form">
+    Open Form
+</button>
+<div id="form-app">
+    <div class="f-container" :class="{'visible' : show}">
+        <div class="f-body">
+            <h4 class="f-step-title" v-if="step === 1">
+                <span class="text-primary">ШАГ №1</span> — Куда отправить доступы к программе и БОНУСЫ?
+            </h4>
+            <h4 class="f-step-title" v-if="step === 2">
+                <span class="text-primary">ШАГ №2</span> — Дополните Свой Заказ!
+            </h4>
+            <span class="f-close" @click="show = false"></span>
+            <div class="f-step">
+                <div class="f-step-header" :class="'f-step-header-' + step">
+                    <div :class="step === 1 ? 'primary' : 'secondary'">
+                        <img src="form/11.png" alt="" v-if="step === 1">
+                        <img src="form/21.png" alt="" v-else>
+                        <div>
+                            <p>Шаг 1: Информация для доступа</p>
+                            <p>
+                                Куда отправить доступы <br>
+                                к программе и БОНУСЫ?
+                            </p>
+                        </div>
+                    </div>
+                    <div :class="step === 2 ? 'primary' : 'secondary'">
+                        <img src="form/12.png" alt="" v-if="step === 1">
+                        <img src="form/22.png" alt="" v-else>
+                        <div>
+                            <p>Шаг 2: Подтверждение </p>
+                            <p>
+                                Мы готовы предоставить доступ <br>
+                                к программе
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="f-body-content">
+                    <form action="https://coderoad.ru" @submit.prevent class="f-form" method="get">
+                        <div class="f-hidden" :class="{'f-displayed' : step === 1}">
+                            <input v-model="name" type="text" class="f-input" name="name" placeholder="Ваше Имя">
+                            <input v-model="phone" type="text" class="f-input" name="phone" placeholder="Ваш телефон">
+                            <input v-model="email" type="text" class="f-input email-input" name="email" placeholder="Ваш E-mail">
+                            <input type="hidden" name="uid" :value="value">
+                        </div>
+                        <div class="f-hidden" :class="{'f-displayed' : step === 2}">
+                            <h4 class="f-step-title" style="font-weight: 700;">
+                                СПЕЦИАЛЬНОЕ ПРЕДЛОЖЕНИЕ ДЛЯ УСКОРЕНИЯ
+                                ТРАНСФОРМАЦИИ МЫШЛЕНИЯ
+                            </h4>
+                            <p class="f-text text-center mb-2">
+                                <strong>ДА, я хочу устранить главное токсическое убеждения</strong>, которое сейчас
+                                создает 95% препятствий к достижению финансовых целей в моей жизни
+                                (я могу этого даже не осознавать) с помощью коуча GoldCoach!
+                            </p>
+                            <p class="text-center f-more mb-2" @click="showMore = !showMore">Узнать больше ...</p>
+                            <div class="f-show-more" v-if="showMore">
+                                <p class="f-text text-center mb-2">
+                                    Чтобы усилить и ускорить результаты от программы <strong>МЫШЛЕНИЕ 10Х</strong>
+                                    мы создали специальный процесс «охоты на демонов», который убирает
+                                    глубокие подсознательные токсические убеждения, с которыми
+                                    работать самостоятельно очень сложно!
+                                </p>
+                                <p class="f-text text-center mb-2 hide-phone">
+                                    <strong>С вами будет работать сертифицированные <br>
+                                        коучи-охотники в группе или 1 на 1.</strong>
+                                </p>
+                            </div>
+                            <p class="f-text text-center mb-2">
+                                <strong class="hide-phone">
+                                    ВЫБЕРИТЕ УДОБНЫЙ ВАМ ВАРИАНТ ПРОХОЖДЕНИЯ <br>
+                                    ПРОЦЕССА «ОХОТНИК НА ДЕМОНОВ»
+                                </strong>
+                                <strong class="hide-large">
+                                    ВЫБЕРИТЕ  ВАРИАНТ <br>
+                                    ПРОХОЖДЕНИЯ ПРОЦЕССА
+                                </strong>
+                            </p>
+                            <div class="f-option">
+                                <span class="f-close hide-large" v-if="item12" @click="item12 = false"></span>
+                                <div class="f-with-img">
+                                    <div class="f-img">
+                                        <img src="form/v1.png" alt="">
+                                    </div>
+                                    <div class="f-option-content">
+                                        <p>
+                                            <strong>Групповой</strong>
+                                            мастермайнд
+                                            180 минут работы
+                                            в Zoom в группе
+                                        </p>
+                                        <span class="muted hide-phone">
+                                            + дополнительные бонусы
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="muted mb-1">Обычная цена — $75</p>
+                                    <strong class="text-primary">
+                                        Цена при оплате  <br class="hide-phone">
+                                        сейчас — $12
+                                    </strong>
+                                </div>
+                                <button class="f-add" :class="{'f-added' : item12}" @click="item12 = !item12">
+                                    <svg class="svg-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><g><g><path fill="#5f5e5e" d="M20 9.961c0 5.492-4.468 10.04-9.96 10.04C4.546 20 0 15.452 0 9.96 0 4.468 4.547.001 10.04.001 15.531 0 20 4.467 20 9.96zm-3.516 0c0-.646-.526-1.172-1.171-1.172H11.21V4.688a1.173 1.173 0 0 0-2.344 0v4.101h-4.18c-.646 0-1.171.526-1.171 1.172 0 .646.525 1.172 1.172 1.172h4.18v4.18c0 .645.525 1.171 1.171 1.171s1.172-.526 1.172-1.171v-4.18h4.102c.645 0 1.171-.526 1.171-1.172z"/></g></g></svg>
+                                    <img src="form/sad.png" class="svg-sad" alt="">
+                                    <span class="f-passive">{{item12 ? 'В ЗАКАЗЕ' : 'ДОБАВИТЬ'}}</span>
+                                    <span class="f-active">УБРАТЬ</span>
+                                </button>
+                            </div>
+
+                            <div class="f-option">
+                                <span class="f-close hide-large" v-if="item39" @click="item39 = false"></span>
+                                <div class="f-with-img">
+                                    <div class="f-img">
+                                        <img src="form/v2.png" alt="">
+                                    </div>
+                                    <div class="f-option-content">
+                                        <p>
+                                            <strong>
+                                                Личная работа
+                                                1 на 1 с коучем
+                                            </strong>
+                                            55 минут работы
+                                            1 на 1 в Skype
+                                            Ответы на вопросы
+                                            Домашнее задание
+                                        </p>
+                                        <span class="muted hide-phone">
+                                            + дополнительные бонусы
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="muted mb-1">Обычная цена — $97</p>
+                                    <strong class="text-primary">
+                                        Цена при оплате <br class="hide-phone">
+                                        сейчас — $39
+                                    </strong>
+                                </div>
+                                <button class="f-add" :class="{'f-added' : item39}" @click="item39 = !item39">
+                                    <svg class="svg-plus" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><g><g><path fill="#5f5e5e" d="M20 9.961c0 5.492-4.468 10.04-9.96 10.04C4.546 20 0 15.452 0 9.96 0 4.468 4.547.001 10.04.001 15.531 0 20 4.467 20 9.96zm-3.516 0c0-.646-.526-1.172-1.171-1.172H11.21V4.688a1.173 1.173 0 0 0-2.344 0v4.101h-4.18c-.646 0-1.171.526-1.171 1.172 0 .646.525 1.172 1.172 1.172h4.18v4.18c0 .645.525 1.171 1.171 1.171s1.172-.526 1.172-1.171v-4.18h4.102c.645 0 1.171-.526 1.171-1.172z"/></g></g></svg>
+                                    <img src="form/sad.png" class="svg-sad" alt="">
+                                    <span class="f-passive">{{item39 ? 'В ЗАКАЗЕ' : 'ДОБАВИТЬ'}}</span>
+                                    <span class="f-active">УБРАТЬ</span>
+                                </button>
+                            </div>
+
+                            <div class="f-order">
+                                <div class="f-row bb">
+                                    <span>Ваш заказ</span>
+                                    <span>Цена</span>
+                                </div>
+                                <div class="f-row">
+                                    <span>
+                                        Участие в программе <br>МЫШЛЕНИЕ 10Х <br> <span class="fw-400">с дополнительными бонусами</span>
+                                    </span>
+                                    <span>$7</span>
+                                </div>
+                                <div class="f-row" v-if="item39">
+                                    <span>
+                                        Прохождение 55-минутного коучинга <br>
+1 на 1 ОХОТНИК НА ДЕМОНОВ <br>
+<span class="fw-400">с дополнительными бонусами</span>
+                                    </span>
+                                    <span>$39</span>
+                                </div>
+                                <div class="f-row" v-if="item12">
+                                    <span>
+                                       Прохождение группового МастерМайнда <br>
+ОХОТНИК НА ДЕМОНОВ <br>
+<span class="fw-400">с дополнительными бонусами</span>
+                                    </span>
+                                    <span>$12</span>
+                                </div>
+                                <div class="f-row bt">
+                                    <span>
+                                       ОБЩАЯ СУММА:
+                                    </span>
+                                    <span>${{total}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="f-button-green" type="submit" @click="handleSubmit">
+                            <img src="form/cart.png" alt="">
+                            <span>
+                                <strong>
+                                    Получить Специальное Предложение
+                                </strong> <br>
+                                <span class="hide-phone">
+                                    ДА! Я хочу участвовать в МЫШЛЕНИИ 10Х!
+                                </span>
+                            </span>
+                        </button>
+                        <div class="f-icons-wrap">
+                            <div class="f-icon">
+                                <img src="form/shield.png" alt="">
+                                <span>
+                                    ВАШИ ДАННЫЕ В БЕЗОПАСНОСТИ
+                                </span>
+                            </div>
+                            <div class="f-icon">
+                                <img src="form/cash.png" alt="">
+                                <span>
+                                    ГАРАНТИЯ ВОЗВРАТА ДЕНЕГ
+                                </span>
+                            </div>
+                            <div class="f-icon">
+                                <img src="form/people.png" alt="">
+                                <span>
+                                    13 950+ КЛИЕНТОВ ПРОШЛИ ПРОГРАММУ
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="f-backdrop" v-if="show"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="form/form.js"></script>
+</body>
+</html>
